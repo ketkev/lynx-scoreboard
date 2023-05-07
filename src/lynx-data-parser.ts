@@ -18,7 +18,7 @@ function parseEvent(line: string): LynxEvent {
     return {
         status: data[0],
         eventName: data[1],
-        wind: data[2]?.toLowerCase() === "nwi" ? null : data[2],
+        wind: null,
         eventNo: parseInt(data[3]),
         roundNo: parseInt(data[4]),
         heatNo: parseInt(data[5]),
@@ -60,7 +60,7 @@ function parseResults(message: string): LynxResults {
     return {
         event: parseEvent(firstLine),
         results: lines
-        // Remove empty lines
+            // Remove empty lines
             .filter((line) => line.replace("|", "").length > 0)
             .map((line) => parseResult(line)),
     };
